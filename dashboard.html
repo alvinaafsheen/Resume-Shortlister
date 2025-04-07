@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .btn {
+            background: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dashboard</h1>
+    <div class="card">
+        <input type="file" id="fileInput">
+        <p id="fileName"></p>
+        <button class="btn" id="uploadBtn" disabled>Upload</button>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById("fileInput");
+        const fileName = document.getElementById("fileName");
+        const uploadBtn = document.getElementById("uploadBtn");
+
+        fileInput.addEventListener("change", function() {
+            if (fileInput.files.length > 0) {
+                fileName.textContent = `Selected: ${fileInput.files[0].name}`;
+                uploadBtn.disabled = false;
+            } else {
+                fileName.textContent = "";
+                uploadBtn.disabled = true;
+            }
+        });
+
+        uploadBtn.addEventListener("click", function() {
+            alert(`File ${fileInput.files[0].name} uploaded successfully!`);
+            fileInput.value = "";
+            fileName.textContent = "";
+            uploadBtn.disabled = true;
+        });
+    </script>
+</body>
+</html>
